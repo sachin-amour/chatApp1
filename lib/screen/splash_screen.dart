@@ -50,23 +50,12 @@ class _splashScreenState extends State<splashScreen> {
                     left: mQuery.width * .25,
                     width: mQuery.width * .5,
                     child: Text(
-                      "❤️ from",
+                      "❤️ from Amour",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 22,
                         fontFamily: 'sFonts',
                       ),
-                    ),
-                  ),
-
-                  Positioned(
-                    bottom: mQuery.height * .01,
-                    left: mQuery.width * .31,
-                    width: mQuery.width * .5,
-                    height: mQuery.height * .49,
-                    child: Image.asset(
-                      "assets/images/amour.png",
-                      height: mQuery.height * .2,
                     ),
                   ),
                 ],

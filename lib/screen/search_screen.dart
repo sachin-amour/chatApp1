@@ -445,7 +445,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           backgroundColor: Colors.teal.shade700,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
+                            horizontal: 13,
                             vertical: 12,
                           ),
                           shape: RoundedRectangleBorder(
@@ -453,7 +453,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 8),
                       OutlinedButton.icon(
                         onPressed: _clearSearch,
                         icon: const Icon(Icons.search),
@@ -462,7 +462,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           foregroundColor: Colors.teal.shade700,
                           side: BorderSide(color: Colors.teal.shade700),
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 18,
+                            horizontal: 15,
                             vertical: 12,
                           ),
                           shape: RoundedRectangleBorder(

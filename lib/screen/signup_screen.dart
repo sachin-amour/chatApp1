@@ -47,35 +47,46 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _build());
-  }
-
-  Widget _build() {
-    return SafeArea(
-      child: Stack(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
-          child: Column(children: [
-            _header(),
-            if (!isloading) _signupForm(),
-            if (!isloading) _login(),
-            if (isloading)
-              Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                child: Column(
+                  children: [
+                    _header(),
+                    SizedBox(height: 30),
+                    if (!isloading) _signupForm(),
+                    if (!isloading) _login(),
+                    if (isloading)
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.teal.shade400,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-              )
-          ]),
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.of(context).size.height * -0.04,
+              right: MediaQuery.of(context).size.width * -0.03,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.55,
+                height: MediaQuery.of(context).size.width * 0.55,
+                child: Image.asset('assets/images/chatbobles.png'),
+              ),
+            ),
+          ],
         ),
-        Positioned(
-          top: MediaQuery.of(context).size.height * -0.04,
-          right: MediaQuery.of(context).size.width * -0.03,
-          child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.55,
-              height: MediaQuery.of(context).size.width * 0.55,
-              child: Image.asset('assets/images/chatbobles.png')),
-        ),
-      ]),
+      ),
     );
   }
 
@@ -87,18 +98,19 @@ class _SignupScreenState extends State<SignupScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            " Let's get started !",
+            "Let's get started!",
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 28,
               fontWeight: FontWeight.w800,
             ),
           ),
+          SizedBox(height: 8),
           Text(
             "Register below with your details",
             style: TextStyle(
-              color: Colors.grey,
-              fontSize: 17,
+              color: Colors.grey.shade600,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -108,53 +120,50 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Widget _signupForm() {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.60,
-      margin: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).size.height * 0.05,
-      ),
-      child: Form(
-        key: _signupFromKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _profileImg(),
-            SizedBox(height: 20),
-            customTextField(
-              hintText: "name",
-              height: MediaQuery.of(context).size.height * 0.1,
-              validationRegEx: NAME_VALIDATION_REGEX,
-              onSaved: (value) {
-                setState(() {
-                  name = value;
-                });
-              },
-            ),
-            customTextField(
-              hintText: "Email",
-              height: MediaQuery.of(context).size.height * 0.1,
-              validationRegEx: EMAIL_VALIDATION_REGEX,
-              onSaved: (value) {
-                setState(() {
-                  email = value;
-                });
-              },
-            ),
-            customTextField(
-              hintText: "Password",
-              height: MediaQuery.of(context).size.height * 0.1,
-              validationRegEx: PASSWORD_VALIDATION_REGEX,
-              obscureText: true,
-              onSaved: (value) {
-                setState(() {
-                  password = value;
-                });
-              },
-            ),
-            _signUpBtn(),
-          ],
-        ),
+    return Form(
+      key: _signupFromKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _profileImg(),
+          SizedBox(height: 24),
+          customTextField(
+            hintText: "Name",
+            height: 70,
+            validationRegEx: NAME_VALIDATION_REGEX,
+            onSaved: (value) {
+              setState(() {
+                name = value;
+              });
+            },
+          ),
+          SizedBox(height: 16),
+          customTextField(
+            hintText: "Email",
+            height: 70,
+            validationRegEx: EMAIL_VALIDATION_REGEX,
+            onSaved: (value) {
+              setState(() {
+                email = value;
+              });
+            },
+          ),
+          SizedBox(height: 16),
+          customTextField(
+            hintText: "Password",
+            height: 70,
+            validationRegEx: PASSWORD_VALIDATION_REGEX,
+            obscureText: true,
+            onSaved: (value) {
+              setState(() {
+                password = value;
+              });
+            },
+          ),
+          SizedBox(height: 24),
+          _signUpBtn(),
+        ],
       ),
     );
   }
@@ -169,11 +178,33 @@ class _SignupScreenState extends State<SignupScreen> {
           });
         }
       },
-      child: CircleAvatar(
-        radius: MediaQuery.of(context).size.width * 0.15,
-        backgroundImage: selectedImage != null
-            ? FileImage(selectedImage!)
-            : NetworkImage(PLACEHOLDER_PFP) as ImageProvider,
+      child: Stack(
+        children: [
+          CircleAvatar(
+            radius: MediaQuery.of(context).size.width * 0.15,
+            backgroundColor: Colors.grey.shade200,
+            backgroundImage: selectedImage != null
+                ? FileImage(selectedImage!)
+                : NetworkImage(PLACEHOLDER_PFP) as ImageProvider,
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.teal.shade400,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 3),
+              ),
+              child: Icon(
+                Icons.camera_alt,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -181,11 +212,13 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget _signUpBtn() {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.06,
+      height: 54,
       child: MaterialButton(
-        elevation: 1,
+        elevation: 0,
         color: Colors.teal.shade400,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         onPressed: () async {
           setState(() {
             isloading = true;
@@ -201,38 +234,39 @@ class _SignupScreenState extends State<SignupScreen> {
                   uid: _authservice.user!.uid,
                 );
                 if (pfpURL != null) {
-                  // ✅ CRITICAL CHANGE: Added email field here
                   await _firestoreService.creatUserProfile(
                     userProfile: UserProfile(
                       uid: _authservice.user!.uid,
                       name: name!,
                       pfpURL: pfpURL,
-                      email: email!, // ← THIS IS THE KEY ADDITION
+                      email: email!,
                     ),
                   );
                   _alertService.showToast(
-                      message: "User registered successfully!",
-                      icon: Icons.check);
+                    message: "User registered successfully!",
+                    icon: Icons.check,
+                  );
 
                   _navigationService.goBack();
                   _navigationService.pushReplacementNamed("/home");
                 } else {
-                  throw Exception("unable to upload profile picture");
+                  throw Exception("Unable to upload profile picture");
                 }
               } else {
-                throw Exception("unable to register user");
+                throw Exception("Unable to register user");
               }
             } else {
-              // Show error if image not selected
               _alertService.showToast(
-                  message: "Please select a profile picture",
-                  icon: Icons.error);
+                message: "Please select a profile picture",
+                icon: Icons.error,
+              );
             }
           } catch (e) {
             print(e);
             _alertService.showToast(
-                message: "Failed to register, please try again",
-                icon: Icons.error);
+              message: "Failed to register, please try again",
+              icon: Icons.error,
+            );
           }
           setState(() {
             isloading = false;
@@ -240,28 +274,42 @@ class _SignupScreenState extends State<SignupScreen> {
         },
         child: Text(
           "Sign Up",
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
   }
 
   Widget _login() {
-    return Expanded(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Already have an account?",
-            style: TextStyle(color: Colors.grey, fontSize: 16),
+            "Already have an account? ",
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 15),
           ),
           TextButton(
             onPressed: () {
               _navigationService.goBack();
             },
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size(0, 0),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
             child: Text(
               "Login",
-              style: TextStyle(color: Colors.teal, fontSize: 20),
+              style: TextStyle(
+                color: Colors.teal.shade600,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],

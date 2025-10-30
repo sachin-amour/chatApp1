@@ -171,7 +171,7 @@ class ContactUsScreen extends StatelessWidget {
                                   'https://www.linkedin.com/in/sachin-sharma-amour',
                                   const Color(0xFF0077B5),
                                 ),
-                                const SizedBox(width: 20),
+                                const SizedBox(width: 10),
                                 _buildSocialButton(
                                   FontAwesomeIcons.facebook,
                                   'Facebook',
@@ -275,7 +275,7 @@ class ContactUsScreen extends StatelessWidget {
       onTap: () => _launchURL(url),
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(16),
@@ -289,8 +289,8 @@ class ContactUsScreen extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 24, color: Colors.white),
-            const SizedBox(width: 12),
+            Icon(icon, size: 22, color: Colors.white),
+            const SizedBox(width: 8),
             Text(
               label,
               style: const TextStyle(
