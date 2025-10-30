@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "861622964813",
+    "project_id": "feelings-f514d",
+    "storage_bucket": "feelings-f514d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861622964813:android:19ee9dc60fc120ec7a8204",
+        "android_client_info": {
+          "package_name": "com.example.feelings"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxKoVhUAfvXX0qsfo5h0r3VKTWtDReg5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
